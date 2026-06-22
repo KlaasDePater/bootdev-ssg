@@ -20,11 +20,11 @@ class HTMLNode:
         return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
     
 class LeafNode(HTMLNode):
-    def __init__(self, tag: str | None, value: str, props: dict | None = None):
+    def __init__(self, tag: str | None, value: str | None, props: dict | None = None):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
-        if self.value == '':
+        if self.value is None:
             raise ValueError
         if self.tag is None or self.tag == '':
             return self.value
@@ -34,7 +34,7 @@ class LeafNode(HTMLNode):
         return f"LeafNode({self.tag}, {self.value}, {self.props})"
     
 class ParentNode(HTMLNode):
-    def __init__(self, tag: str, children: list, props: dict | None = None):
+    def __init__(self, tag: str, children: list[HTMLNode], props: dict | None = None):
         super().__init__(tag, None, children, props)
         self.children = children
 
