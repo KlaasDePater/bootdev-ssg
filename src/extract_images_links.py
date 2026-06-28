@@ -29,11 +29,12 @@ def split_nodes_link(old_nodes: list[TextNode]) -> list[TextNode]:
         # We could just use the extracted link descriptions [1::3] and link URLs [2::3], but we didn't write the helpers for nothing.
         links = extract_markdown_links(node.text)
         for i in range(0, len(plain_text_strings) + len(links)):
-            # Even nodes, starting with 0, should be plain text, unless empty. Odd nodes are links
+            # When the counter is even, starting with 0, there should be a plain text node, unless that string is empty.
             if i % 2 == 0:
                 if plain_text_strings[i // 2] == '':
                     continue
                 new_nodes.append(TextNode(plain_text_strings[i // 2], TextType.PLAIN))
+            # When the counter is odd we should add a link node
             else:
                 new_nodes.append(TextNode(links[(i - 1) // 2][0], TextType.LINK, links[(i - 1) // 2][1]))
     return new_nodes
@@ -52,11 +53,12 @@ def split_nodes_image(old_nodes: list[TextNode]) -> list[TextNode]:
         plain_text_strings = split_text_strings[0::3]
         images = extract_markdown_images(node.text)
         for i in range(0, len(plain_text_strings) + len(images)):
-            # Even nodes, starting with 0, should be plain text, unless empty. Odd nodes are images
+            # When the counter is even, starting with 0, there should be a plain text node, unless that string is empty.
             if i % 2 == 0:
                 if plain_text_strings[i // 2] == '':
                     continue
                 new_nodes.append(TextNode(plain_text_strings[i // 2], TextType.PLAIN))
+            # When the counter is odd we should add an image node
             else:
                 new_nodes.append(TextNode(images[(i - 1) // 2][0], TextType.IMAGE, images[(i - 1) // 2][1]))
     return new_nodes
