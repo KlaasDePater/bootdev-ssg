@@ -26,9 +26,13 @@ class TestLeafNode(unittest.TestCase):
         node = LeafNode("p", "Hello, world!")
         self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
 
-    def test_leaf_to_html_s(self):
+    def test_leaf_to_html_a(self):
         node = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
         self.assertEqual(node.to_html(), '<a href="https://www.google.com">Click me!</a>')
+
+    def test_leaf_to_html_img(self):
+        node = LeafNode("img", "", {"src": "img_girl.jpg", "alt": "Girl in a jacket", "width": "500", "height": "600"})
+        self.assertEqual(node.to_html(), '<img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600">')
 
     def test_empty_value(self):
         node = LeafNode("p", None)
