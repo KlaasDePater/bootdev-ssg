@@ -57,5 +57,5 @@ def markdown_to_blocks(markdown: str) -> list[str]:
     split = markdown.split("\n\n")
     for s in split:
         if len(s) > 0 and s != "\n":
-            blocks.append(s.strip())
+            blocks.append(s.strip("\n "))
     return blocks

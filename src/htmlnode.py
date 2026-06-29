@@ -42,9 +42,9 @@ class ParentNode(HTMLNode):
 
     def to_html(self):
         if self.tag == "":
-            raise ValueError("Tag is empty")
+            raise ValueError(f"Tag is empty for node [{self.value}]")
         if len(self.children) == 0:
-            raise ValueError("List of children is empty")
+            raise ValueError(f"List of children is empty for node [{self.value}]")
         child_string = ""
         for child in self.children:
             child_string += child.to_html()
