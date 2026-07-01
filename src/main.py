@@ -56,7 +56,7 @@ def main():
     if not basepath.endswith("/"):
         raise Exception(f"Basepath {basepath} does not end with a '/'")
     print(f"Basepath will be: {basepath}")
-    copy_content()
+    copy_content("static/", "docs/")
     generate_pages_recursively("content/", "template.html", "docs/", basepath)
 
 if __name__ == "__main__":
